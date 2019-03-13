@@ -1,0 +1,92 @@
+== K8s Desktop
+
+=== Dependancies
+
+  * bazel
+  * docker desktop
+  ** with kubernetes enabled
+  * kubectl
+
+=== What
+
+This is a setup build to create the following on your locker docker-for-desktop that is included with the docker CE install.
+
+Items that this creates:
+
+  * Admin Account for K8s dashboard
+  * K8s dashboard
+  * metallb for localized load balancers
+  * a storage fix for storage type of "standard"
+
+=== How to run
+
+Example of the commands and output
+
+==== Commands
+[NOTE]
+===============================
+*NOTE* Run from
+
+infra/k8sbootstrap
+===============================
+
+
+```
+bazel run //:bootstrap
+```
+
+==== Example Output
+```
+▶ bazel run //:bootstrap
+INFO: Analysed target //:bootstrap (0 packages loaded, 0 targets configured).
+INFO: Found 1 target...
+Target //:bootstrap up-to-date:
+  bazel-bin/bootstrap
+INFO: Elapsed time: 3.186s, Critical Path: 0.01s
+INFO: 0 processes.
+INFO: Build completed successfully, 1 total action
+INFO: Build completed successfully, 1 total action
+Switched to context "docker-for-desktop".
+serviceaccount/admin-user created
+clusterrolebinding.rbac.authorization.k8s.io/admin-user created
+storageclass.storage.k8s.io/standard created
+secret/kubernetes-dashboard-certs created
+serviceaccount/kubernetes-dashboard created
+role.rbac.authorization.k8s.io/kubernetes-dashboard-minimal created
+rolebinding.rbac.authorization.k8s.io/kubernetes-dashboard-minimal created
+deployment.apps/kubernetes-dashboard created
+service/kubernetes-dashboard created
+namespace/metallb-system created
+serviceaccount/controller created
+serviceaccount/speaker created
+clusterrole.rbac.authorization.k8s.io/metallb-system:controller created
+clusterrole.rbac.authorization.k8s.io/metallb-system:speaker created
+role.rbac.authorization.k8s.io/config-watcher created
+clusterrolebinding.rbac.authorization.k8s.io/metallb-system:controller created
+clusterrolebinding.rbac.authorization.k8s.io/metallb-system:speaker created
+rolebinding.rbac.authorization.k8s.io/config-watcher created
+daemonset.apps/speaker created
+deployment.apps/controller created
+$HELM_HOME has been configured at /home/landonkt/.helm.
+
+Tiller (the Helm server-side component) has been installed into your Kubernetes Cluster.
+
+Please note: by default, Tiller is deployed with an insecure 'allow unauthenticated users' policy.
+To prevent this, run `helm init` with the --tiller-tls-verify flag.
+For more information on securing your installation see: https://docs.helm.sh/using_helm/#securing-your-helm-installation
+Happy Helming!
+Name:         admin-user-token-tzg44
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: admin-user
+              kubernetes.io/service-account.uid: 6b1e5c8b-45e0-11e9-a97a-00155d00df01
+
+Type:  kubernetes.io/service-account-token
+
+Data
+
+ca.crt:     1025 bytes
+namespace:  11 bytes
+token:      ****MUCKED****
+
+```
