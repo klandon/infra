@@ -19,3 +19,15 @@
 # Ignore jekyll build output.
 /production
 /.sass-cache
+bazel
+bazel-*
+bazel-bazel-test
+bazel-bin
+bazel-genfiles
+bazel-out
+bazel-testlogs
+bazel-vagrant
+bazel-bazel-example
+.vagrant/
+Vagrantfile
+.idea/
