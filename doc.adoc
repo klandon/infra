@@ -8,7 +8,7 @@ This repo is a mono repo collection of infra tools, process, or script that I us
 
 At this time I am not allowing contribution but this is free to use under the license found on the bottom of this page.
 
-include::k8sbootstrap/README.adoc[]
+include::k8sbootstrap/doc.adoc[]
 
 == License
-include::LICENSE.adoc[]
+include::LICENSE[]
